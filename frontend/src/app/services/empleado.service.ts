@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 enviar datos o realizar otras operaciones basadas en HTTP. */
 import { HttpClient } from '@angular/common/http';
 import { Empleado } from "../models/empleado";
+import e from 'express';
 @Injectable({
   providedIn: 'root'
 })
 export class EmpleadoService {
 
-  selecteEmpleado!: Empleado; 
+  selectedEmpleado!: Empleado; 
   empleados!: Empleado[];
 
   readonly URL_API = 'http://localhost:3000/api/empleados';
@@ -16,7 +17,7 @@ export class EmpleadoService {
 
 
   constructor(private http: HttpClient) {
-    
+    this.selectedEmpleado = new Empleado();
 
   }
 

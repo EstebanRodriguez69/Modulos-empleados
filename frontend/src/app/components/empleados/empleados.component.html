@@ -6,22 +6,23 @@
                     <form #empleadoForm="ngForm" (ngSubmit)="addEmpleado(empleadoForm)">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input type="text" id="documento" name="documento" [(ngModel)]="empleadoService.selecteEmpleado.documento">
+                                <input type="text" id="documento" name="documento" #documento="ngModel" [(ngModel)]="empleadoService.selectedEmpleado.documento">
                                 <label for="documento">Documento</label>
                             </div>
                             <div class="input-field col s12">
-                                <input type="text" id="nombre" name="nombre" [(ngModel)]="empleadoService.selecteEmpleado.nombre">
+                                <input type="text" id="nombre" name="nombre" #nombre="ngModel" [(ngModel)]="empleadoService.selectedEmpleado.nombre">
                                 <label for="nombre">Nombre</label>
                             </div>
                             <div class="input-field col s12">
-                                <input type="text" id="contrasenia" name="contrasenia" [(ngModel)]="empleadoService.selecteEmpleado.contrasenia">
+                                <input type="text" id="contrasenia" name="contrasenia" #contrasenia="ngModel" [(ngModel)]="empleadoService.selectedEmpleado.contrasenia">
                                 <label for="contrasenia">Contraseña</label>
                             </div>
                             <div class="input-field col s12">
-                                <input type="text" id="cargo" name="cargo" [(ngModel)]="empleadoService.selecteEmpleado.cargo">
+                                <input type="text" id="cargo" name="cargo" #cargo="ngModel" [(ngModel)]="empleadoService.selectedEmpleado.cargo">
                                 <label for="cargo">Cargo</label>
                             </div>
                             <button type="submit" class="btn">Guardar</button>
+                            <button type="submit" class="btn right" (click)="resetForm(empleadoForm)">Limpiar</button>
                         </div>
                     </form>
                 </div>

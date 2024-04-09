@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 /* se agrego el modulo NGForm de angular se utiliza para trabajar con formularios en plantillas 
 HTML y manejar la interacción del usuario con los datos del formulario en componentes de Angular */
 import { NgForm } from '@angular/forms';
 
 import { EmpleadoService } from '../../services/empleado.service';
+import { Empleado } from '../../models/empleado';
 
 
 
@@ -13,32 +14,25 @@ import { EmpleadoService } from '../../services/empleado.service';
   styleUrl: './empleados.component.css',
   providers: [EmpleadoService]
 })
-export class EmpleadosComponent {
+export class EmpleadosComponent implements OnInit {
 
-  constructor(public empleadoService: EmpleadoService) {
+  constructor(public empleadoService: EmpleadoService) { }
 
+  ngOnInit() {
   }
 
-  addEmpleado(empleadoForm: NgForm) {
-
-    // Aquí irá la lógica para agregar un empleado
-    console.log('Formulario enviado');
-    console.log(empleadoForm.value); // Puedes acceder a los valores del formulario aquí
-
-    if (this.empleadoService.selecteEmpleado) {
-      this.empleadoService.selecteEmpleado.documento = empleadoForm.value.documento;
-      this.empleadoService.selecteEmpleado.nombre = empleadoForm.value.nombre;
-      this.empleadoService.selecteEmpleado.contrasenia = empleadoForm.value.contrasenia;
-      this.empleadoService.selecteEmpleado.cargo = empleadoForm.value.cargo;
-
-      // Lógica para agregar o actualizar el empleado en el servicio
-      // Por ejemplo, puedes llamar a métodos como postEmpleado o putEmpleado
-      this.empleadoService.putEmpleado(this.empleadoService.selecteEmpleado)
-        .subscribe(res => {
-          console.log('Empleado actualizado:', res);
-        }, err => {
-          console.error('Error al actualizar empleado:', err);
-        });
+  resetForm(form?: NgForm){
+    if (form) {
+      form.reset();
+      this.empleadoService.selectedEmpleado = new Empleado()
     }
   }
+
+  addEmpleado(form: NgForm) {
+    this.empleadoService.postEmpleado(form.value)
+    .subscribe(res => {
+      console.log(res);
+    });
+  }
+  
 }
