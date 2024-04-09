@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+                    <form #empleadoForm="ngForm" (ngSubmit)="addEmpleado(empleadoForm)">
+                        <div class="input-field">
+                            <input type="text" id="nombre" name="nombre" ngModel required>
+                            <label for="nombre">Nombre</label>
+                          </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s7"></div>
+    </div>
+
+</div>
